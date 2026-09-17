@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MONDROAX — Global Business &amp; Advisory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ink:#12181F;
+  --ink-soft:#2B3542;
+  --paper:#EFEDE6;
+  --paper-raised:#F8F7F3;
+  --line:#D8D4C8;
+  --brass:#B4863B;
+  --brass-deep:#8F6A2C;
+  --teal:#3E7C74;
+  --rose:#A8493F;
+  --ink-on-brass:#1A1204;
+  --font-display:'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-body:'IBM Plex Sans', -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-mono:'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  --radius-s:2px;
+  --radius-m:3px;
+  --shadow-card: 0 1px 0 var(--line);
+}
+:root:not([data-theme="light"]){ }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#EDEAE2;
+    --ink-soft:#C7C2B6;
+    --paper:#14181D;
+    --paper-raised:#1B2027;
+    --line:#33383F;
+    --brass:#D4A75B;
+    --brass-deep:#E4BC7A;
+    --teal:#5EA69B;
+    --rose:#C97169;
+    --ink-on-brass:#14181D;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#EDEAE2;
+  --ink-soft:#C7C2B6;
+  --paper:#14181D;
+  --paper-raised:#1B2027;
+  --line:#33383F;
+  --brass:#D4A75B;
+  --brass-deep:#E4BC7A;
+  --teal:#5EA69B;
+  --rose:#C97169;
+  --ink-on-brass:#14181D;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+@media(max-width:640px){.wrap{padding:0 18px;}}
+
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;margin:0;line-height:1.12;letter-spacing:-0.01em;}
+.eyebrow{font-family:var(--font-mono);font-size:12.5px;color:var(--brass-deep);letter-spacing:0.03em;}
+.lede{font-size:17px;color:var(--ink-soft);max-width:52ch;}
+.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;}
+
+section{padding:88px 0;border-top:1px solid var(--line);}
+section:first-of-type{border-top:none;}
+@media(max-width:640px){section{padding:56px 0;}}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-body);font-weight:600;font-size:14.5px;
+  padding:12px 20px;border-radius:var(--radius-s);
+  border:1px solid var(--ink);
+  background:var(--ink);color:var(--paper);
+  cursor:pointer; text-decoration:none;
+  transition:transform .15s ease, opacity .15s ease;
+}
+.btn:hover{opacity:.85;}
+.btn:active{transform:translateY(1px);}
+.btn.secondary{background:transparent;color:var(--ink);border-color:var(--line);}
+.btn.brass{background:var(--brass);border-color:var(--brass);color:var(--ink-on-brass);}
+.btn:focus-visible, a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline:2px solid var(--brass); outline-offset:2px;
+}
+
+/* ============ NAV ============ */
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+.wordmark{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-0.01em;text-decoration:none;color:var(--ink);}
+.wordmark span{color:var(--brass);}
+.navlinks{display:flex;gap:28px;align-items:center;}
+.navlinks a{font-size:14px;text-decoration:none;color:var(--ink-soft);}
+.navlinks a:hover{color:var(--ink);}
+.navcta{display:flex;gap:10px;align-items:center;}
+.navtoggle{display:none;background:none;border:1px solid var(--line);border-radius:var(--radius-s);padding:8px 10px;font-family:var(--font-mono);font-size:13px;}
+@media(max-width:900px){
+  .navlinks{display:none;}
+  .navtoggle{display:inline-block;}
+}
+
+/* ============ HERO ============ */
+.hero{padding-top:64px;}
+.hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px;}}
+.hero h1{font-size:44px;margin-top:14px;}
+@media(max-width:640px){.hero h1{font-size:32px;}}
+.hero .lede{margin-top:16px;font-size:18px;}
+.hero-actions{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
+.hero-meta{display:flex;gap:26px;margin-top:36px;flex-wrap:wrap;}
+.hero-meta div{font-size:13px;color:var(--ink-soft);}
+.hero-meta b{display:block;font-family:var(--font-display);font-size:20px;color:var(--ink);font-weight:600;}
+
+.ticker{
+  background:var(--paper-raised);
+  border:1px solid var(--line);
+  border-radius:var(--radius-m);
+  padding:22px;
+}
+.ticker-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;}
+.ticker-head .eyebrow{margin:0;}
+.demo-tag{font-family:var(--font-mono);font-size:10.5px;color:var(--rose);border:1px solid var(--rose);padding:2px 7px;border-radius:20px;}
+.ticker-rows{display:flex;flex-direction:column;}
+.ticker-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-top:1px solid var(--line);}
+.ticker-row:first-child{border-top:none;}
+.ticker-row .label{font-size:13.5px;color:var(--ink-soft);}
+.ticker-row .val{font-family:var(--font-mono);font-size:17px;font-weight:600;}
+.ticker-row .val.up{color:var(--teal);}
+.ticker-row .val.down{color:var(--rose);}
+
+/* ============ SECTION HEADS ============ */
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:44px;flex-wrap:wrap;}
+.sec-head h2{font-size:32px;max-width:20ch;}
+@media(max-width:640px){.sec-head h2{font-size:26px;}}
+
+/* ============ SERVICES ============ */
+.svc-list{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+.svc-item{border-bottom:1px solid var(--line);}
+.svc-trigger{
+  width:100%;display:flex;justify-content:space-between;align-items:center;
+  gap:20px;background:none;border:none;padding:26px 0;cursor:pointer;text-align:left;color:var(--ink);
+}
+.svc-trigger .n{font-family:var(--font-mono);color:var(--brass-deep);font-size:13px;width:28px;flex-shrink:0;}
+.svc-trigger .t{flex:1;}
+.svc-trigger h3{font-size:22px;font-weight:600;}
+.svc-trigger .s{display:block;font-family:var(--font-body);font-size:14px;color:var(--ink-soft);font-weight:400;margin-top:4px;}
+.svc-trigger .plus{font-family:var(--font-mono);font-size:20px;color:var(--ink-soft);transition:transform .2s ease;flex-shrink:0;}
+.svc-item.open .plus{transform:rotate(45deg);color:var(--brass);}
+.svc-panel{max-height:0;overflow:hidden;transition:max-height .28s ease;}
+.svc-item.open .svc-panel{max-height:900px;}
+.svc-panel-inner{padding:0 0 32px 48px;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+@media(max-width:760px){.svc-panel-inner{grid-template-columns:1fr;padding-left:0;}}
+.svc-col h4{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-soft);font-weight:500;margin-bottom:10px;}
+.svc-col ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink-soft);}
+.svc-col ul li{margin-bottom:6px;}
+.svc-col .example{font-size:14px;color:var(--ink-soft);background:var(--paper-raised);border:1px solid var(--line);padding:12px 14px;border-radius:var(--radius-s);}
+.svc-ask{font-size:13.5px;font-weight:600;color:var(--brass-deep);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;}
+
+/* ============ WHY ============ */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+@media(max-width:900px){.why-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.why-grid{grid-template-columns:1fr;}}
+.why-cell{background:var(--paper);padding:28px 24px;}
+.why-cell .num{color:var(--brass);font-size:13px;}
+.why-cell h4{font-size:17px;margin-top:10px;margin-bottom:8px;}
+.why-cell p{font-size:14px;color:var(--ink-soft);margin:0;}
+
+/* ============ PORTFOLIO ============ */
+.demo-banner{
+  display:flex;gap:10px;align-items:center;
+  border:1px solid var(--rose);color:var(--rose);
+  font-family:var(--font-mono);font-size:12.5px;
+  padding:10px 14px;border-radius:var(--radius-s);margin-bottom:30px;
+  width:fit-content;
+}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:32px;}
+.tab{
+  font-family:var(--font-body);font-size:14px;font-weight:600;color:var(--ink-soft);
+  background:none;border:none;padding:12px 16px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;
+}
+.tab.active{color:var(--ink);border-bottom-color:var(--brass);}
+.dash-panel{display:none;}
+.dash-panel.active{display:block;}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px;}
+@media(max-width:760px){.kpi-row{grid-template-columns:repeat(2,1fr);}}
+.kpi{background:var(--paper-raised);padding:20px;}
+.kpi .label{font-size:12.5px;color:var(--ink-soft);}
+.kpi .value{font-family:var(--font-mono);font-size:24px;font-weight:600;margin-top:6px;}
+.kpi .delta{font-family:var(--font-mono);font-size:12px;margin-top:4px;}
+.kpi .delta.up{color:var(--teal);}
+.kpi .delta.down{color:var(--rose);}
+.chart-row{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-bottom:28px;}
+@media(max-width:900px){.chart-row{grid-template-columns:1fr;}}
+.chart-card{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius-m);padding:22px;}
+.chart-card h4{font-size:14.5px;font-weight:600;margin-bottom:16px;}
+.chart-card .ch-wrap{position:relative;height:260px;}
+.filters{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.filters select{
+  font-family:var(--font-body);font-size:13.5px;padding:8px 12px;border-radius:var(--radius-s);
+  border:1px solid var(--line);background:var(--paper-raised);color:var(--ink);
+}
+table.data{width:100%;border-collapse:collapse;font-size:13.5px;}
+table.data th{
+  text-align:left;font-family:var(--font-mono);font-weight:500;font-size:11.5px;color:var(--ink-soft);
+  padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;
+}
+table.data td{padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;}
+.data-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-m);background:var(--paper-raised);}
+.pill{font-family:var(--font-mono);font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;}
+.pill.ok{background:color-mix(in srgb, var(--teal) 16%, transparent);color:var(--teal);}
+.pill.warn{background:color-mix(in srgb, var(--brass) 20%, transparent);color:var(--brass-deep);}
+.pill.bad{background:color-mix(in srgb, var(--rose) 16%, transparent);color:var(--rose);}
+.insight-box{background:var(--paper-raised);border-left:2px solid var(--brass);padding:16px 20px;margin-top:24px;font-size:14px;color:var(--ink-soft);}
+.insight-box b{color:var(--ink);}
+
+/* ============ PROCESS ============ */
+.process-list{display:flex;flex-direction:column;}
+.process-step{display:grid;grid-template-columns:70px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--line);}
+.process-step:last-child{border-bottom:1px solid var(--line);}
+.process-step .n{font-family:var(--font-mono);color:var(--brass);font-size:15px;}
+.process-step h4{font-size:17px;margin-bottom:6px;}
+.process-step p{margin:0;font-size:14px;color:var(--ink-soft);max-width:60ch;}
+
+/* ============ INDUSTRIES ============ */
+.chip-row{display:flex;flex-wrap:wrap;gap:10px;}
+.chip{border:1px solid var(--line);border-radius:20px;padding:8px 16px;font-size:13.5px;color:var(--ink-soft);}
+
+/* ============ PRICING ============ */
+.currency-toggle{display:inline-flex;border:1px solid var(--line);border-radius:20px;overflow:hidden;}
+.currency-toggle button{
+  font-family:var(--font-mono);font-size:12.5px;padding:7px 16px;border:none;background:none;color:var(--ink-soft);cursor:pointer;
+}
+.currency-toggle button.active{background:var(--ink);color:var(--paper);}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:32px;}
+@media(max-width:980px){.pricing-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.pricing-grid{grid-template-columns:1fr;}}
+.plan{border:1px solid var(--line);border-radius:var(--radius-m);padding:26px;display:flex;flex-direction:column;background:var(--paper-raised);}
+.plan.feat{border-color:var(--brass);box-shadow:0 0 0 1px var(--brass);}
+.plan .tag{font-family:var(--font-mono);font-size:11px;color:var(--brass-deep);margin-bottom:10px;}
+.plan h3{font-size:20px;margin-bottom:6px;}
+.plan .for{font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+.plan .price{font-family:var(--font-mono);font-size:26px;font-weight:600;margin-bottom:2px;}
+.plan .price small{font-size:12px;font-weight:400;color:var(--ink-soft);}
+.plan .setup{font-size:12px;color:var(--ink-soft);margin-bottom:18px;}
+.plan ul{list-style:none;margin:0 0 22px;padding:0;font-size:13.5px;flex:1;}
+.plan ul li{padding:7px 0;border-top:1px solid var(--line);color:var(--ink-soft);}
+.plan ul li:first-child{border-top:none;}
+.plan .btn{justify-content:center;}
+
+/* ============ ROI CALC ============ */
+.roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+@media(max-width:900px){.roi-grid{grid-template-columns:1fr;}}
+.field{margin-bottom:18px;}
+.field label{display:block;font-size:13px;color:var(--ink-soft);margin-bottom:6px;}
+.field input{
+  width:100%;font-family:var(--font-mono);font-size:15px;padding:11px 13px;
+  border:1px solid var(--line);border-radius:var(--radius-s);background:var(--paper-raised);color:var(--ink);
+}
+.roi-results{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius-m);padding:28px;}
+.roi-big{font-family:var(--font-mono);font-size:38px;font-weight:600;color:var(--teal);margin:6px 0 2px;}
+.roi-sub{font-size:13px;color:var(--ink-soft);margin-bottom:22px;}
+.roi-line{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line);font-size:13.5px;}
+.roi-line:first-of-type{border-top:none;}
+.roi-note{font-size:12px;color:var(--ink-soft);margin-top:18px;line-height:1.5;}
+
+/* ============ ABOUT ============ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:32px;}}
+.about-grid h4{font-family:var(--font-mono);font-size:11.5px;color:var(--brass-deep);margin-bottom:10px;}
+.about-grid p{font-size:15px;color:var(--ink-soft);margin:0 0 26px;}
+.values-list{display:flex;flex-wrap:wrap;gap:10px;}
+
+/* ============ CONTACT ============ */
+.contact-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:56px;}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:32px;}}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:560px){.form-row{grid-template-columns:1fr;}}
+.field2{margin-bottom:16px;}
+.field2 label{display:block;font-size:13px;color:var(--ink-soft);margin-bottom:6px;}
+.field2 input, .field2 select, .field2 textarea{
+  width:100%;font-family:var(--font-body);font-size:14px;padding:11px 13px;
+  border:1px solid var(--line);border-radius:var(--radius-s);background:var(--paper-raised);color:var(--ink);
+}
+.field2 textarea{resize:vertical;min-height:90px;}
+.form-msg{display:none;margin-top:16px;padding:14px 16px;border-left:2px solid var(--teal);background:var(--paper-raised);font-size:13.5px;}
+.form-msg.show{display:block;}
+.contact-info div{margin-bottom:22px;}
+.contact-info .l{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-soft);margin-bottom:4px;}
+.contact-info .v{font-size:15px;}
+
+footer{border-top:1px solid var(--line);padding:40px 0;}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.foot-row .wordmark{font-size:16px;}
+.foot-row p{font-size:12.5px;color:var(--ink-soft);margin:0;}
+
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;} }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap navbar">
+    <a href="#top" class="wordmark">MONDROA<span>X</span></a>
+    <nav class="navlinks">
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="navcta">
+      <a href="#contact" class="btn brass">Book a discovery call</a>
+      <button class="navtoggle" id="themeToggle" aria-label="Toggle theme">◐</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">PHILIPPINES-BASED BUSINESS &amp; ADVISORY PARTNER</p>
+      <h1>Business operations. Finance. Data. One trusted partner.</h1>
+      <p class="lede">MONDROAX runs the consulting, accounting, payroll, and reporting work that keeps a growing business honest with itself — so founders and operators can spend their time on the business, not inside its back office.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn brass">Book a discovery call</a>
+        <a href="#portfolio" class="btn secondary">See the portfolio</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>4</b>core specialists, one point of contact</div>
+        <div><b>5</b>services under one engagement</div>
+        <div><b>PH + Global</b>clients served remotely</div>
+      </div>
+    </div>
+    <div class="ticker">
+      <div class="ticker-head">
+        <p class="eyebrow" style="margin:0;">LIVE PORTFOLIO SNAPSHOT</p>
+        <span class="demo-tag">DEMO DATA</span>
+      </div>
+      <div class="ticker-rows" id="heroTicker"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">WHAT WE DO</p>
+        <h2>Five services, one accountable team</h2>
+      </div>
+      <p class="lede">Each division works on its own, and works better together — your bookkeeper, payroll lead, and data analyst are reading the same numbers.</p>
+    </div>
+    <div class="svc-list" id="svcList"></div>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">WHY CLIENTS WORK WITH US</p>
+        <h2>Built for businesses without a back office yet</h2>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><div class="why-grid" id="whyGrid"></div></div>
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+<section id="portfolio">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">INTERACTIVE PORTFOLIO</p>
+        <h2>What the dashboards we build actually look like</h2>
+      </div>
+      <p class="lede">Every figure below is fictional sample data, built to show the kind of reporting a MONDROAX engagement produces.</p>
+    </div>
+    <div class="demo-banner">⚠ ALL FIGURES ON THIS PAGE ARE ILLUSTRATIVE DEMO DATA, NOT REAL CLIENT RESULTS</div>
+    <div class="tabs" id="dashTabs"></div>
+    <div id="dashPanels"></div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">HOW WE WORK</p>
+        <h2>From first call to a running monthly engagement</h2>
+      </div>
+    </div>
+    <div class="process-list" id="processList"></div>
+  </div>
+</section>
+
+<!-- ================= INDUSTRIES ================= -->
+<section id="industries">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">WHO WE SERVE</p>
+        <h2>Built around a few client types, not every industry</h2>
+      </div>
+    </div>
+    <div class="chip-row" id="industryChips"></div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">PACKAGES</p>
+        <h2>Priced for where a business actually is</h2>
+      </div>
+      <div class="currency-toggle" id="currencyToggle">
+        <button data-cur="php" class="active">PHP</button>
+        <button data-cur="usd">USD</button>
+      </div>
+    </div>
+    <p class="lede" style="margin-bottom:0;">Ranges, not fixed quotes — final pricing depends on transaction volume, headcount, and reporting complexity.</p>
+    <div class="pricing-grid" id="pricingGrid"></div>
+  </div>
+</section>
+
+<!-- ================= ROI CALCULATOR ================= -->
+<section id="roi">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">ROI CALCULATOR</p>
+        <h2>A rough read on what back-office work is costing you</h2>
+      </div>
+    </div>
+    <div class="roi-grid">
+      <div>
+        <div class="field">
+          <label for="rEmp">Number of employees doing back-office / admin work</label>
+          <input type="number" id="rEmp" value="3" min="0">
+        </div>
+        <div class="field">
+          <label for="rHours">Hours per week each spends on back-office tasks</label>
+          <input type="number" id="rHours" value="10" min="0">
+        </div>
+        <div class="field">
+          <label for="rWage">Average fully-loaded hourly cost per employee (PHP)</label>
+          <input type="number" id="rWage" value="250" min="0">
+        </div>
+        <div class="field">
+          <label for="rAdmin">Current monthly administrative overhead (PHP)</label>
+          <input type="number" id="rAdmin" value="15000" min="0">
+        </div>
+        <div class="field">
+          <label for="rReport">Current monthly cost of reporting / bookkeeping help (PHP)</label>
+          <input type="number" id="rReport" value="10000" min="0">
+        </div>
+      </div>
+      <div class="roi-results">
+        <p class="eyebrow" style="margin:0;">ESTIMATED POTENTIAL SAVINGS</p>
+        <div class="roi-big" id="roiSavingsMonthly">₱0</div>
+        <p class="roi-sub">per month, illustrative — <span id="roiSavingsAnnual">₱0</span> per year</p>
+        <div class="roi-line"><span>Current estimated monthly cost</span><b id="roiCurrent" class="num">₱0</b></div>
+        <div class="roi-line"><span>Back-office hours freed up / month</span><b id="roiHours" class="num">0 hrs</b></div>
+        <div class="roi-line"><span>Estimated cost with MONDROAX support</span><b id="roiOutsourced" class="num">₱0</b></div>
+        <p class="roi-note">Illustrative estimate only, not a quote or a guaranteed saving. Assumes MONDROAX can absorb roughly 65% of identified back-office hours at typical outsourcing efficiency gains. Actual results depend on your scope, systems, and data quality — a discovery call gives a real number.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <h4>MISSION</h4>
+      <p>To give small and growing businesses the finance, payroll, data, and operations discipline of a much larger company — without the overhead of building one in-house.</p>
+      <h4>VISION</h4>
+      <p>To be a dependable operating partner for Philippine SMEs and foreign companies building back-office capability in the Philippines, known for clear reporting and steady delivery rather than size.</p>
+      <h4>ELEVATOR PITCH</h4>
+      <p>MONDROAX is a lean Philippines-based advisory and outsourcing firm that runs a growing company's consulting, finance, payroll, and reporting work as one connected engagement instead of four separate vendors.</p>
+    </div>
+    <div>
+      <h4>CORE VALUES</h4>
+      <div class="values-list">
+        <span class="chip">Accuracy over speed</span>
+        <span class="chip">Plain reporting</span>
+        <span class="chip">Client data stays client data</span>
+        <span class="chip">No scope surprises</span>
+        <span class="chip">Right-sized advice</span>
+      </div>
+      <h4 style="margin-top:26px;">A NOTE ON COMPLIANCE</h4>
+      <p>Where a task legally requires a licensed accountant, tax practitioner, or other regulated professional in the Philippines, that work is performed or reviewed by an appropriately credentialed partner — MONDROAX does not represent itself as a substitute for licensed professional services.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="eyebrow">GET IN TOUCH</p>
+      <h2 style="font-size:28px;">Tell us what's currently a mess</h2>
+      <p class="lede" style="margin-top:14px;">A 30-minute discovery call is usually enough to tell you whether this is a fit.</p>
+      <div class="contact-info" style="margin-top:32px;">
+        <div><p class="l">EMAIL</p><p class="v">hello@mondroax.com</p></div>
+        <div><p class="l">BASED IN</p><p class="v">Philippines · serving PH &amp; international clients remotely</p></div>
+        <div><p class="l">RESPONSE TIME</p><p class="v">Within 1 business day</p></div>
+      </div>
+    </div>
+    <div>
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="field2"><label for="cName">Name</label><input type="text" id="cName" required></div>
+          <div class="field2"><label for="cCompany">Company</label><input type="text" id="cCompany"></div>
+        </div>
+        <div class="form-row">
+          <div class="field2"><label for="cEmail">Email</label><input type="email" id="cEmail" required></div>
+          <div class="field2"><label for="cPhone">Phone</label><input type="tel" id="cPhone"></div>
+        </div>
+        <div class="form-row">
+          <div class="field2">
+            <label for="cService">Service needed</label>
+            <select id="cService">
+              <option>Business Consulting</option>
+              <option>Accounting &amp; Finance</option>
+              <option>Payroll &amp; Administration</option>
+              <option>Data &amp; Analytics</option>
+              <option>Outsourcing</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="field2">
+            <label for="cSize">Company size</label>
+            <select id="cSize">
+              <option>Solo / 1 person</option>
+              <option>2–10 employees</option>
+              <option>11–50 employees</option>
+              <option>50+ employees</option>
+            </select>
+          </div>
+        </div>
+        <div class="field2"><label for="cMsg">Message</label><textarea id="cMsg"></textarea></div>
+        <button type="submit" class="btn brass">Send message</button>
+        <div class="form-msg" id="formMsg">Thanks — this is a demo form, so nothing was actually sent, but on the live site this would notify our team and we'd reply within a business day.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <a href="#top" class="wordmark">MONDROA<span style="color:var(--brass);">X</span></a>
+    <p>Global Business &amp; Advisory · Philippines · Sample site built with illustrative demo data</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   THEME TOGGLE
+============================================================ */
+var themeBtn = document.getElementById('themeToggle');
+themeBtn.addEventListener('click', function(){
+  var root = document.documentElement;
+  var cur = root.getAttribute('data-theme');
+  var next = cur === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+});
+
+/* ============================================================
+   DATA
+============================================================ */
+var SERVICES = [
+  {
+    title:"Business Consulting",
+    sub:"Strategy · Operations · Process Improvement",
+    includes:["Strategy & growth planning","Operations diagnostics","Process improvement & SOP design"],
+    deliverables:["Current-state assessment","Prioritized recommendations","Implementation roadmap"],
+    example:"A 6-week engagement for a 12-person logistics SME identified 3 manual approval steps that were adding 4 days to order turnaround.",
+    cta:"Ask about a business assessment"
+  },
+  {
+    title:"Accounting & Finance",
+    sub:"Bookkeeping · Management Reports · Budgeting · Analysis",
+    includes:["Monthly bookkeeping & reconciliation","Management reporting pack","Budget vs. actual tracking","Financial analysis"],
+    deliverables:["Monthly financial statements","Variance commentary","Cash flow summary"],
+    example:"A recurring monthly reporting pack: P&L, balance sheet, budget-vs-actual, and a one-page commentary a non-finance founder can actually read.",
+    cta:"Ask about monthly bookkeeping"
+  },
+  {
+    title:"Payroll & Administration",
+    sub:"Payroll Processing · Compensation Records · Admin Support",
+    includes:["End-to-end payroll processing","Compensation record-keeping","General administrative support"],
+    deliverables:["Payroll register","Payslips","Statutory contribution summaries"],
+    example:"Payroll for a 25-person team processed on a fixed monthly schedule, with a compensation dashboard the founder can check anytime.",
+    cta:"Ask about payroll support"
+  },
+  {
+    title:"Data & Analytics",
+    sub:"Data Management · Reporting · Business Intelligence",
+    includes:["Data cleanup & structuring","Recurring reporting","Dashboards & business intelligence"],
+    deliverables:["Cleaned data model","Live dashboard","Monthly refresh & insight notes"],
+    example:"A single sales + operations dashboard replacing 4 separate spreadsheets a client's team was manually reconciling every week.",
+    cta:"Ask about a dashboard build"
+  },
+  {
+    title:"Outsourcing",
+    sub:"Finance & Accounting · Payroll · Back-office Operations",
+    includes:["Outsourced finance & accounting function","Outsourced payroll function","Outsourced back-office operations"],
+    deliverables:["Dedicated service owner","SLA-based delivery","Monthly performance summary"],
+    example:"A foreign SME entering the Philippines runs its entire local back office through MONDROAX rather than hiring an internal team from day one.",
+    cta:"Ask about outsourcing a function"
+  }
+];
+
+var WHY = [
+  {n:"01", h:"One team, five functions", p:"Consulting, finance, payroll, data, and outsourcing read the same numbers instead of four vendors guessing at each other's work."},
+  {n:"02", h:"Built for lean teams", p:"Packages start where a 1–20 person company actually is, not where an enterprise BPO expects you to be."},
+  {n:"03", h:"Reporting you can read", p:"Every engagement includes plain-language monthly reporting, not just raw numbers in a shared folder."},
+  {n:"04", h:"Right-sized compliance", p:"Work that legally needs a licensed professional is flagged and routed to one — we don't pretend otherwise."}
+];
+
+var PROCESS = [
+  {h:"Lead", p:"You reach out, or we do, through referral, LinkedIn, or the site."},
+  {h:"Discovery call", p:"A 30-minute conversation to understand what's currently manual, late, or unclear."},
+  {h:"Assessment", p:"We look at your current documents, systems, and process gaps before quoting anything."},
+  {h:"Proposal", p:"A scoped proposal with a package or custom engagement, priced as a range until scope is confirmed."},
+  {h:"Onboarding", p:"Access, data handover, and a shared calendar of recurring deliverables get set up."},
+  {h:"Service delivery", p:"Work runs on a fixed monthly cycle with a named point of contact."},
+  {h:"Monthly reporting", p:"You get the agreed reports and dashboards on a predictable schedule."},
+  {h:"Retention & upsell", p:"As needs grow, we recommend — not push — the next relevant service."}
+];
+
+var INDUSTRIES = ["Philippine SMEs","Early-stage startups","Foreign companies entering PH","Companies without a BI/data team",
+"Businesses outgrowing spreadsheets","Founders doing their own books","Remote-first teams needing PH back office","Firms needing payroll for a small team"];
+
+var PRICING = [
+  {tag:"STARTER", name:"Starter", forc:"Micro & small businesses formalizing their first back office",
+   php:[15000,35000], usd:[280,650], setup:"₱5,000–₱10,000 one-time setup",
+   incl:["Monthly bookkeeping","Basic management report","Up to 5 payroll headcount","Email support"],
+   featured:false},
+  {tag:"GROWTH", name:"Growth", forc:"Growing SMEs adding structure and reporting discipline",
+   php:[35000,70000], usd:[650,1300], setup:"₱10,000–₱20,000 one-time setup",
+   incl:["Full bookkeeping & reconciliation","Monthly management report pack","Up to 20 payroll headcount","1 live dashboard","Priority support"],
+   featured:true},
+  {tag:"PROFESSIONAL", name:"Professional", forc:"Established SMEs needing consulting + reporting together",
+   php:[70000,140000], usd:[1300,2600], setup:"₱20,000–₱35,000 one-time setup",
+   incl:["Everything in Growth","Quarterly strategy/ops review","Up to 50 payroll headcount","Up to 3 dashboards","Dedicated account contact"],
+   featured:false},
+  {tag:"ENTERPRISE / OUTSOURCING", name:"Enterprise", forc:"Companies requiring a dedicated outsourced function",
+   php:[140000,300000], usd:[2600,5500], setup:"Custom, scoped per engagement",
+   incl:["Dedicated service team member(s)","Custom SLA","Unlimited headcount (scoped)","Custom dashboard suite","Monthly business review"],
+   featured:false}
+];
+
+/* Dashboard demo datasets — all fictional */
+var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var FIN = {
+  revenue:[410,432,455,470,498,520,545,560,590,615,640,668],
+  expense:[310,325,330,342,355,360,372,381,395,405,418,430],
+  budget:[400,415,430,450,470,490,510,530,550,570,590,610]
+};
+var PAYROLL_DEPTS = [
+  {dept:"Operations", head:8, cost:312000, avg:39000, ot:18000},
+  {dept:"Finance", head:3, cost:141000, avg:47000, ot:4000},
+  {dept:"Sales", head:4, cost:168000, avg:42000, ot:6000},
+  {dept:"Admin", head:2, cost:70000, avg:35000, ot:0},
+  {dept:"Data/BI", head:2, cost:98000, avg:49000, ot:3000}
+];
+var OPS_TASKS = [
+  {client:"Client A — Retail", project:"Monthly Close", status:"Completed", sla:"On time", aging:0},
+  {client:"Client B — Logistics", project:"Payroll Run", status:"Completed", sla:"On time", aging:0},
+  {client:"Client C — F&B", project:"Dashboard Refresh", status:"In progress", sla:"On track", aging:2},
+  {client:"Client D — SaaS", project:"Bookkeeping", status:"In progress", sla:"At risk", aging:5},
+  {client:"Client A — Retail", project:"Budget Variance", status:"Overdue", sla:"Breached", aging:9},
+  {client:"Client E — Manufacturing", project:"Process Assessment", status:"In progress", sla:"On track", aging:1},
+  {client:"Client F — Trading", project:"Payroll Run", status:"Completed", sla:"On time", aging:0},
+  {client:"Client B — Logistics", project:"BI Dashboard Build", status:"In progress", sla:"On track", aging:3},
+  {client:"Client G — Clinic", project:"Bookkeeping", status:"Overdue", sla:"Breached", aging:12},
+  {client:"Client C — F&B", project:"Monthly Close", status:"Completed", sla:"On time", aging:0}
+];
+var SALES_LEADS = [
+  {lead:"Northbridge Retail Co.", industry:"Retail", size:"11–50", service:"Outsourcing", stage:"Proposal", value:85000, prob:60},
+  {lead:"Solara Logistics", industry:"Logistics", size:"2–10", service:"Accounting & Finance", stage:"Discovery", value:32000, prob:30},
+  {lead:"Kettlewell F&B Group", industry:"Food & Beverage", size:"11–50", service:"Payroll", stage:"Closed-Won", value:48000, prob:100},
+  {lead:"Vantree Manufacturing", industry:"Manufacturing", size:"50+", service:"Data & Analytics", stage:"Proposal", value:120000, prob:55},
+  {lead:"Mirasol Clinic Group", industry:"Healthcare", size:"11–50", service:"Accounting & Finance", stage:"Qualified", value:38000, prob:40},
+  {lead:"Basilan Trading Corp", industry:"Trading", size:"2–10", service:"Business Consulting", stage:"Discovery", value:25000, prob:20},
+  {lead:"Everline SaaS PH", industry:"Technology", size:"2–10", service:"Outsourcing", stage:"Closed-Won", value:64000, prob:100},
+  {lead:"Coastal Freight Ltd.", industry:"Logistics", size:"11–50", service:"Payroll", stage:"Closed-Lost", value:41000, prob:0}
+];
+var BI_KPIS = [
+  {kpi:"Client Retention Rate", target:90, actual:94, unit:"%"},
+  {kpi:"SLA On-Time Delivery", target:95, actual:88, unit:"%"},
+  {kpi:"Gross Margin", target:55, actual:58, unit:"%"},
+  {kpi:"Utilization Rate", target:75, actual:81, unit:"%"},
+  {kpi:"Avg. Days to Close Books", target:5, actual:6, unit:"days"}
+];
+
+/* ============================================================
+   COLORS (read from CSS vars so charts follow theme)
+============================================================ */
+function cssVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+function chartColors(){
+  return {
+    ink: cssVar('--ink'), soft: cssVar('--ink-soft'), line: cssVar('--line'),
+    brass: cssVar('--brass'), teal: cssVar('--teal'), rose: cssVar('--rose'), paper: cssVar('--paper-raised')
+  };
+}
+function fmtPHP(n){ return "₱" + Math.round(n).toLocaleString('en-PH'); }
+
+/* ============================================================
+   HERO TICKER
+============================================================ */
+(function(){
+  var rows = [
+    {label:"MRR across active clients", val: fmtPHP(482000), dir:"up"},
+    {label:"SLA on-time delivery", val:"88%", dir:"down"},
+    {label:"Active recurring clients", val:"14", dir:"up"},
+    {label:"Avg. days to monthly close", val:"6 days", dir:"up"}
+  ];
+  var el = document.getElementById('heroTicker');
+  el.innerHTML = rows.map(function(r){
+    return '<div class="ticker-row"><span class="label">'+r.label+'</span><span class="val '+r.dir+'">'+r.val+'</span></div>';
+  }).join('');
+})();
+
+/* ============================================================
+   SERVICES ACCORDION
+============================================================ */
+(function(){
+  var list = document.getElementById('svcList');
+  list.innerHTML = SERVICES.map(function(s, i){
+    var idx = String(i+1).padStart(2,'0');
+    return (
+    '<div class="svc-item" id="svc-'+i+'">' +
+      '<button class="svc-trigger" data-i="'+i+'">' +
+        '<span class="n">'+idx+'</span>' +
+        '<span class="t"><h3>'+s.title+'</h3><span class="s">'+s.sub+'</span></span>' +
+        '<span class="plus">+</span>' +
+      '</button>' +
+      '<div class="svc-panel"><div class="svc-panel-inner">' +
+        '<div class="svc-col"><h4>INCLUDES</h4><ul>'+s.includes.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></div>' +
+        '<div class="svc-col"><h4>DELIVERABLES</h4><ul>'+s.deliverables.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></div>' +
+        '<div class="svc-col"><h4>EXAMPLE</h4><p class="example">'+s.example+'</p>' +
+          '<button class="svc-ask" data-service="'+s.title+'" style="margin-top:12px;">'+s.cta+' →</button></div>' +
+      '</div></div>' +
+    '</div>');
+  }).join('');
+
+  list.addEventListener('click', function(e){
+    var trig = e.target.closest('.svc-trigger');
+    if(trig){
+      var item = trig.closest('.svc-item');
+      var wasOpen = item.classList.contains('open');
+      list.querySelectorAll('.svc-item.open').forEach(function(o){ o.classList.remove('open'); });
+      if(!wasOpen) item.classList.add('open');
+      return;
+    }
+    var ask = e.target.closest('.svc-ask');
+    if(ask){
+      var svc = ask.getAttribute('data-service');
+      var sel = document.getElementById('cService');
+      Array.from(sel.options).forEach(function(o){ if(o.text.indexOf(svc.split(' ')[0])===0 || o.text===svc){ sel.value=o.value; } });
+      document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+      document.getElementById('cName').focus({preventScroll:true});
+    }
+  });
+})();
+
+/* ============================================================
+   WHY GRID
+============================================================ */
+(function(){
+  document.getElementById('whyGrid').innerHTML = WHY.map(function(w){
+    return '<div class="why-cell"><span class="num">'+w.n+'</span><h4>'+w.h+'</h4><p>'+w.p+'</p></div>';
+  }).join('');
+})();
+
+/* ============================================================
+   PROCESS
+============================================================ */
+(function(){
+  document.getElementById('processList').innerHTML = PROCESS.map(function(p, i){
+    return '<div class="process-step"><span class="n">'+String(i+1).padStart(2,'0')+'</span><div><h4>'+p.h+'</h4><p>'+p.p+'</p></div></div>';
+  }).join('');
+})();
+
+/* ============================================================
+   INDUSTRIES
+============================================================ */
+(function(){
+  document.getElementById('industryChips').innerHTML = INDUSTRIES.map(function(i){
+    return '<span class="chip">'+i+'</span>';
+  }).join('');
+})();
+
+/* ============================================================
+   PRICING
+============================================================ */
+(function(){
+  var grid = document.getElementById('pricingGrid');
+  var cur = 'php';
+  function render(){
+    grid.innerHTML = PRICING.map(function(p){
+      var range = cur === 'php' ? p.php : p.usd;
+      var symbol = cur === 'php' ? '₱' : '$';
+      var priceStr = symbol + range[0].toLocaleString() + '–' + symbol + range[1].toLocaleString();
+      return (
+      '<div class="plan'+(p.featured?' feat':'')+'">' +
+        '<span class="tag">'+p.tag+(p.featured?' · MOST CHOSEN':'')+'</span>' +
+        '<h3>'+p.name+'</h3>' +
+        '<p class="for">'+p.forc+'</p>' +
+        '<div class="price">'+priceStr+' <small>/ month</small></div>' +
+        '<p class="setup">'+p.setup+'</p>' +
+        '<ul>'+p.incl.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>' +
+        '<a href="#contact" class="btn '+(p.featured?'brass':'secondary')+'">Ask about '+p.name+'</a>' +
+      '</div>');
+    }).join('');
+  }
+  render();
+  document.getElementById('currencyToggle').addEventListener('click', function(e){
+    var btn = e.target.closest('button');
+    if(!btn) return;
+    cur = btn.getAttribute('data-cur');
+    this.querySelectorAll('button').forEach(function(b){ b.classList.toggle('active', b===btn); });
+    render();
+  });
+})();
+
+/* ============================================================
+   ROI CALCULATOR
+============================================================ */
+(function(){
+  var ids = ['rEmp','rHours','rWage','rAdmin','rReport'];
+  function calc(){
+    var emp = parseFloat(document.getElementById('rEmp').value) || 0;
+    var hrs = parseFloat(document.getElementById('rHours').value) || 0;
+    var wage = parseFloat(document.getElementById('rWage').value) || 0;
+    var admin = parseFloat(document.getElementById('rAdmin').value) || 0;
+    var report = parseFloat(document.getElementById('rReport').value) || 0;
+
+    var monthlyHours = emp * hrs * 4.33;
+    var laborCost = monthlyHours * wage;
+    var currentTotal = laborCost + admin + report;
+
+    var absorbRate = 0.65;
+    var hoursSaved = monthlyHours * absorbRate;
+    var savings = (laborCost * absorbRate * 0.5) + (report * 0.5) + (admin * 0.4);
+    var outsourcedCost = Math.max(currentTotal - savings, 0);
+
+    document.getElementById('roiSavingsMonthly').textContent = fmtPHP(savings);
+    document.getElementById('roiSavingsAnnual').textContent = fmtPHP(savings*12);
+    document.getElementById('roiCurrent').textContent = fmtPHP(currentTotal);
+    document.getElementById('roiHours').textContent = Math.round(hoursSaved) + ' hrs';
+    document.getElementById('roiOutsourced').textContent = fmtPHP(outsourcedCost);
+  }
+  ids.forEach(function(id){ document.getElementById(id).addEventListener('input', calc); });
+  calc();
+})();
+
+/* ============================================================
+   CONTACT FORM
+============================================================ */
+(function(){
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('formMsg').classList.add('show');
+  });
+})();
+
+/* ============================================================
+   PORTFOLIO DASHBOARDS
+============================================================ */
+var DASH_TABS = [
+  {id:'exec', label:'Executive'},
+  {id:'finance', label:'Finance'},
+  {id:'payroll', label:'Payroll'},
+  {id:'ops', label:'Operations'},
+  {id:'sales', label:'Sales'}
+];
+var chartsRegistry = {};
+
+(function(){
+  document.getElementById('dashTabs').innerHTML = DASH_TABS.map(function(t,i){
+    return '<button class="tab'+(i===0?' active':'')+'" data-tab="'+t.id+'">'+t.label+'</button>';
+  }).join('');
+
+  var panels = document.getElementById('dashPanels');
+  panels.innerHTML = DASH_TABS.map(function(t,i){
+    return '<div class="dash-panel'+(i===0?' active':'')+'" id="panel-'+t.id+'"></div>';
+  }).join('');
+
+  buildExecPanel();
+  buildFinancePanel();
+  buildPayrollPanel();
+  buildOpsPanel();
+  buildSalesPanel();
+
+  document.getElementById('dashTabs').addEventListener('click', function(e){
+    var btn = e.target.closest('.tab');
+    if(!btn) return;
+    var id = btn.getAttribute('data-tab');
+    document.querySelectorAll('.tab').forEach(function(b){ b.classList.toggle('active', b===btn); });
+    document.querySelectorAll('.dash-panel').forEach(function(p){ p.classList.toggle('active', p.id==='panel-'+id); });
+    // resize charts when panel becomes visible
+    Object.keys(chartsRegistry).forEach(function(k){ if(k.indexOf(id)===0) chartsRegistry[k].resize(); });
+  });
+})();
+
+function buildExecPanel(){
+  var el = document.getElementById('panel-exec');
+  var totalRev = FIN.revenue.reduce(function(a,b){return a+b;},0);
+  var totalProfit = FIN.revenue.reduce(function(a,b,i){return a+(b-FIN.expense[i]);},0);
+  el.innerHTML =
+    '<div class="kpi-row">' +
+      kpi("Annual Revenue (Demo)", fmtPHP(totalRev*1000), "+12% YoY","up") +
+      kpi("Gross Profit (Demo)", fmtPHP(totalProfit*1000), "+9% YoY","up") +
+      kpi("Active Clients", "14", "+3 this quarter","up") +
+      kpi("SLA On-Time", "88%", "-4 pts vs target","down") +
+    '</div>' +
+    '<div class="chart-row">' +
+      '<div class="chart-card"><h4>Revenue trend, monthly</h4><div class="ch-wrap"><canvas id="ch-exec-rev"></canvas></div></div>' +
+      '<div class="chart-card"><h4>Revenue by service line</h4><div class="ch-wrap"><canvas id="ch-exec-mix"></canvas></div></div>' +
+    '</div>' +
+    '<div class="insight-box"><b>Insight:</b> Revenue is trending up 12% year over year while SLA on-time delivery has slipped 4 points — worth a capacity review before it affects retention.</div>';
+
+  var c = chartColors();
+  chartsRegistry['exec-rev'] = new Chart(document.getElementById('ch-exec-rev'), {
+    type:'line',
+    data:{ labels:MONTHS, datasets:[
+      {label:'Revenue (₱k)', data:FIN.revenue, borderColor:c.brass, backgroundColor:c.brass, tension:.3, pointRadius:2},
+      {label:'Budget (₱k)', data:FIN.budget, borderColor:c.soft, borderDash:[4,4], pointRadius:0, tension:.3}
+    ]},
+    options: baseLineOpts(c)
+  });
+  chartsRegistry['exec-mix'] = new Chart(document.getElementById('ch-exec-mix'), {
+    type:'doughnut',
+    data:{ labels:['Accounting & Finance','Payroll','Outsourcing','Consulting','Data & Analytics'],
+      datasets:[{data:[34,24,22,12,8], backgroundColor:[c.brass,c.teal,c.rose,c.soft,c.ink], borderColor:c.paper, borderWidth:2}]},
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'bottom', labels:{color:c.soft, boxWidth:10, font:{size:11}}}}}
+  });
+}
+
+function buildFinancePanel(){
+  var el = document.getElementById('panel-finance');
+  var latestRev = FIN.revenue[FIN.revenue.length-1];
+  var latestExp = FIN.expense[FIN.expense.length-1];
+  el.innerHTML =
+    '<div class="filters"><select id="finRange"><option value="12">Last 12 months</option><option value="6">Last 6 months</option><option value="3">Last 3 months</option></select></div>' +
+    '<div class="kpi-row">' +
+      kpi("Revenue (latest month)", fmtPHP(latestRev*1000), "vs budget "+fmtPHP(FIN.budget[FIN.budget.length-1]*1000),"up") +
+      kpi("Expenses (latest month)", fmtPHP(latestExp*1000), "-2% vs prior","up") +
+      kpi("Net Profit (latest month)", fmtPHP((latestRev-latestExp)*1000), "+15% vs prior","up") +
+      kpi("A/R Outstanding", fmtPHP(186000), "22 days avg","warn") +
+    '</div>' +
+    '<div class="chart-row">' +
+      '<div class="chart-card"><h4>Budget vs. actual revenue</h4><div class="ch-wrap"><canvas id="ch-fin-budget"></canvas></div></div>' +
+      '<div class="chart-card"><h4>Revenue vs. expense</h4><div class="ch-wrap"><canvas id="ch-fin-rev-exp"></canvas></div></div>' +
+    '</div>' +
+    '<div class="insight-box"><b>Insight:</b> Actual revenue has stayed ahead of budget for 8 of the last 12 months — a case for revisiting the budget baseline next planning cycle.</div>';
+
+  var c = chartColors();
+  function draw(n){
+    var labels = MONTHS.slice(-n), rev = FIN.revenue.slice(-n), bud = FIN.budget.slice(-n), exp = FIN.expense.slice(-n);
+    if(chartsRegistry['fin-budget']) chartsRegistry['fin-budget'].destroy();
+    if(chartsRegistry['fin-rev-exp']) chartsRegistry['fin-rev-exp'].destroy();
+    chartsRegistry['fin-budget'] = new Chart(document.getElementById('ch-fin-budget'), {
+      type:'bar', data:{labels:labels, datasets:[
+        {label:'Actual (₱k)', data:rev, backgroundColor:c.brass},
+        {label:'Budget (₱k)', data:bud, backgroundColor:c.line}
+      ]}, options: baseBarOpts(c)
+    });
+    chartsRegistry['fin-rev-exp'] = new Chart(document.getElementById('ch-fin-rev-exp'), {
+      type:'line', data:{labels:labels, datasets:[
+        {label:'Revenue (₱k)', data:rev, borderColor:c.teal, backgroundColor:c.teal, tension:.3, pointRadius:2},
+        {label:'Expense (₱k)', data:exp, borderColor:c.rose, backgroundColor:c.rose, tension:.3, pointRadius:2}
+      ]}, options: baseLineOpts(c)
+    });
+  }
+  draw(12);
+  document.getElementById('finRange').addEventListener('change', function(){ draw(parseInt(this.value)); });
+}
+
+function buildPayrollPanel(){
+  var el = document.getElementById('panel-payroll');
+  var totalHead = PAYROLL_DEPTS.reduce(function(a,d){return a+d.head;},0);
+  var totalCost = PAYROLL_DEPTS.reduce(function(a,d){return a+d.cost;},0);
+  var totalOT = PAYROLL_DEPTS.reduce(function(a,d){return a+d.ot;},0);
+  el.innerHTML =
+    '<div class="filters"><select id="payDept"><option value="all">All departments</option>'+
+      PAYROLL_DEPTS.map(function(d){return '<option value="'+d.dept+'">'+d.dept+'</option>';}).join('')+
+    '</select></div>' +
+    '<div class="kpi-row">' +
+      kpi("Total Headcount", totalHead, "across 5 departments","up") +
+      kpi("Monthly Payroll Cost", fmtPHP(totalCost), "+1 hire vs last month","up") +
+      kpi("Average Salary", fmtPHP(totalCost/totalHead), "fully-loaded, monthly","up") +
+      kpi("Overtime Cost", fmtPHP(totalOT), "9% of total cost","warn") +
+    '</div>' +
+    '<div class="chart-row">' +
+      '<div class="chart-card"><h4>Payroll cost by department</h4><div class="ch-wrap"><canvas id="ch-pay-dept"></canvas></div></div>' +
+      '<div class="chart-card"><h4>Headcount by department</h4><div class="ch-wrap"><canvas id="ch-pay-head"></canvas></div></div>' +
+    '</div>' +
+    '<div class="data-scroll" style="margin-top:24px;"><table class="data" id="payTable"></table></div>';
+
+  var c = chartColors();
+  chartsRegistry['payroll-dept'] = new Chart(document.getElementById('ch-pay-dept'), {
+    type:'bar', data:{labels:PAYROLL_DEPTS.map(function(d){return d.dept;}), datasets:[
+      {label:'Payroll cost (₱)', data:PAYROLL_DEPTS.map(function(d){return d.cost;}), backgroundColor:c.brass}
+    ]}, options: baseBarOpts(c, true)
+  });
+  chartsRegistry['payroll-head'] = new Chart(document.getElementById('ch-pay-head'), {
+    type:'pie', data:{labels:PAYROLL_DEPTS.map(function(d){return d.dept;}), datasets:[
+      {data:PAYROLL_DEPTS.map(function(d){return d.head;}), backgroundColor:[c.brass,c.teal,c.rose,c.soft,c.ink], borderColor:c.paper, borderWidth:2}
+    ]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{color:c.soft, boxWidth:10, font:{size:11}}}}}
+  });
+
+  function renderTable(filter){
+    var rows = filter==='all' ? PAYROLL_DEPTS : PAYROLL_DEPTS.filter(function(d){return d.dept===filter;});
+    document.getElementById('payTable').innerHTML =
+      '<thead><tr><th>Department</th><th>Headcount</th><th>Avg. Salary</th><th>Overtime</th><th>Total Cost</th></tr></thead><tbody>' +
+      rows.map(function(d){
+        return '<tr><td>'+d.dept+'</td><td class="num">'+d.head+'</td><td class="num">'+fmtPHP(d.avg)+'</td><td class="num">'+fmtPHP(d.ot)+'</td><td class="num">'+fmtPHP(d.cost)+'</td></tr>';
+      }).join('') + '</tbody>';
+  }
+  renderTable('all');
+  document.getElementById('payDept').addEventListener('change', function(){ renderTable(this.value); });
+}
+
+function buildOpsPanel(){
+  var el = document.getElementById('panel-ops');
+  var overdue = OPS_TASKS.filter(function(t){return t.status==='Overdue';}).length;
+  var completed = OPS_TASKS.filter(function(t){return t.status==='Completed';}).length;
+  var inprog = OPS_TASKS.filter(function(t){return t.status==='In progress';}).length;
+  el.innerHTML =
+    '<div class="filters"><select id="opsStatus"><option value="all">All statuses</option><option value="Completed">Completed</option><option value="In progress">In progress</option><option value="Overdue">Overdue</option></select></div>' +
+    '<div class="kpi-row">' +
+      kpi("Completed Tasks", completed, "this month","up") +
+      kpi("In Progress", inprog, "on track or at risk","warn") +
+      kpi("Overdue Tasks", overdue, "SLA breached","down") +
+      kpi("Avg. Aging (open tasks)", "4.5 days", "across open items","warn") +
+    '</div>' +
+    '<div class="chart-row">' +
+      '<div class="chart-card"><h4>Tasks by status</h4><div class="ch-wrap"><canvas id="ch-ops-status"></canvas></div></div>' +
+      '<div class="chart-card"><h4>Aging by task</h4><div class="ch-wrap"><canvas id="ch-ops-aging"></canvas></div></div>' +
+    '</div>' +
+    '<div class="data-scroll" style="margin-top:24px;"><table class="data" id="opsTable"></table></div>';
+
+  var c = chartColors();
+  var statusCounts = {Completed:completed, "In progress":inprog, Overdue:overdue};
+  chartsRegistry['ops-status'] = new Chart(document.getElementById('ch-ops-status'), {
+    type:'doughnut', data:{labels:Object.keys(statusCounts), datasets:[
+      {data:Object.values(statusCounts), backgroundColor:[c.teal,c.brass,c.rose], borderColor:c.paper, borderWidth:2}
+    ]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{color:c.soft, boxWidth:10, font:{size:11}}}}}
+  });
+  chartsRegistry['ops-aging'] = new Chart(document.getElementById('ch-ops-aging'), {
+    type:'bar', data:{labels:OPS_TASKS.map(function(t){return t.project;}), datasets:[
+      {label:'Days aging', data:OPS_TASKS.map(function(t){return t.aging;}), backgroundColor:OPS_TASKS.map(function(t){
+        return t.status==='Overdue'?c.rose:(t.aging>2?c.brass:c.teal);
+      })}
+    ]}, options: baseBarOpts(c, true)
+  });
+
+  function renderTable(filter){
+    var rows = filter==='all' ? OPS_TASKS : OPS_TASKS.filter(function(t){return t.status===filter;});
+    document.getElementById('opsTable').innerHTML =
+      '<thead><tr><th>Client</th><th>Project</th><th>Status</th><th>SLA</th><th>Aging</th></tr></thead><tbody>' +
+      rows.map(function(t){
+        var pillClass = t.sla==='Breached'?'bad':(t.sla==='At risk'?'warn':'ok');
+        return '<tr><td>'+t.client+'</td><td>'+t.project+'</td><td>'+t.status+'</td><td><span class="pill '+pillClass+'">'+t.sla+'</span></td><td class="num">'+t.aging+' d</td></tr>';
+      }).join('') + '</tbody>';
+  }
+  renderTable('all');
+  document.getElementById('opsStatus').addEventListener('change', function(){ renderTable(this.value); });
+}
+
+function buildSalesPanel(){
+  var el = document.getElementById('panel-sales');
+  var won = SALES_LEADS.filter(function(l){return l.stage==='Closed-Won';});
+  var pipeline = SALES_LEADS.filter(function(l){return l.stage!=='Closed-Won' && l.stage!=='Closed-Lost';});
+  var pipelineValue = pipeline.reduce(function(a,l){return a+l.value;},0);
+  var winRate = Math.round(won.length / SALES_LEADS.filter(function(l){return l.stage==='Closed-Won'||l.stage==='Closed-Lost';}).length * 100);
+  el.innerHTML =
+    '<div class="filters"><select id="salesStage"><option value="all">All stages</option><option value="Discovery">Discovery</option><option value="Qualified">Qualified</option><option value="Proposal">Proposal</option><option value="Closed-Won">Closed-Won</option><option value="Closed-Lost">Closed-Lost</option></select></div>' +
+    '<div class="kpi-row">' +
+      kpi("Open Pipeline", SALES_LEADS.length, "leads tracked","up") +
+      kpi("Pipeline Value", fmtPHP(pipelineValue), "weighted by stage","up") +
+      kpi("Win Rate", winRate+"%", "closed deals","up") +
+      kpi("Avg. Deal Size", fmtPHP(SALES_LEADS.reduce(function(a,l){return a+l.value;},0)/SALES_LEADS.length), "across all leads","up") +
+    '</div>' +
+    '<div class="chart-row">' +
+      '<div class="chart-card"><h4>Leads by stage</h4><div class="ch-wrap"><canvas id="ch-sales-stage"></canvas></div></div>' +
+      '<div class="chart-card"><h4>Pipeline value by service</h4><div class="ch-wrap"><canvas id="ch-sales-service"></canvas></div></div>' +
+    '</div>' +
+    '<div class="data-scroll" style="margin-top:24px;"><table class="data" id="salesTable"></table></div>';
+
+  var c = chartColors();
+  var stages = ["Discovery","Qualified","Proposal","Closed-Won","Closed-Lost"];
+  var stageCounts = stages.map(function(s){ return SALES_LEADS.filter(function(l){return l.stage===s;}).length; });
+  chartsRegistry['sales-stage'] = new Chart(document.getElementById('ch-sales-stage'), {
+    type:'bar', data:{labels:stages, datasets:[{label:'Leads', data:stageCounts, backgroundColor:c.brass}]},
+    options: baseBarOpts(c, true)
+  });
+  var services = ["Business Consulting","Accounting & Finance","Payroll","Data & Analytics","Outsourcing"];
+  var serviceValues = services.map(function(s){
+    return SALES_LEADS.filter(function(l){return l.service===s;}).reduce(function(a,l){return a+l.value;},0);
+  });
+  chartsRegistry['sales-service'] = new Chart(document.getElementById('ch-sales-service'), {
+    type:'doughnut', data:{labels:services, datasets:[{data:serviceValues, backgroundColor:[c.brass,c.teal,c.rose,c.soft,c.ink], borderColor:c.paper, borderWidth:2}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{color:c.soft, boxWidth:10, font:{size:11}}}}}
+  });
+
+  function renderTable(filter){
+    var rows = filter==='all' ? SALES_LEADS : SALES_LEADS.filter(function(l){return l.stage===filter;});
+    document.getElementById('salesTable').innerHTML =
+      '<thead><tr><th>Lead</th><th>Industry</th><th>Service</th><th>Stage</th><th>Value</th><th>Probability</th></tr></thead><tbody>' +
+      rows.map(function(l){
+        var pillClass = l.stage==='Closed-Won'?'ok':(l.stage==='Closed-Lost'?'bad':'warn');
+        return '<tr><td>'+l.lead+'</td><td>'+l.industry+'</td><td>'+l.service+'</td><td><span class="pill '+pillClass+'">'+l.stage+'</span></td><td class="num">'+fmtPHP(l.value)+'</td><td class="num">'+l.prob+'%</td></tr>';
+      }).join('') + '</tbody>';
+  }
+  renderTable('all');
+  document.getElementById('salesStage').addEventListener('change', function(){ renderTable(this.value); });
+}
+
+/* ---- chart helpers ---- */
+function kpi(label, value, delta, dir){
+  return '<div class="kpi"><div class="label">'+label+'</div><div class="value">'+value+'</div><div class="delta '+dir+'">'+delta+'</div></div>';
+}
+function baseLineOpts(c){
+  return { responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:'bottom', labels:{color:c.soft, boxWidth:10, font:{size:11}}}},
+    scales:{ x:{ticks:{color:c.soft, font:{size:10}}, grid:{color:c.line}}, y:{ticks:{color:c.soft, font:{size:10}}, grid:{color:c.line}} }
+  };
+}
+function baseBarOpts(c, hideLegend){
+  return { responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display: !hideLegend, position:'bottom', labels:{color:c.soft, boxWidth:10, font:{size:11}}}},
+    scales:{ x:{ticks:{color:c.soft, font:{size:10}}, grid:{display:false}}, y:{ticks:{color:c.soft, font:{size:10}}, grid:{color:c.line}} }
+  };
+}
+
+})();
+</script>
+
+</body>
+</html>
