@@ -611,6 +611,384 @@ footer{
 .corp-note{margin-top:14px;font-size:12px;color:#A99982;}
 @media(max-width:720px){.corp-grid{grid-template-columns:1fr}.corp-row:nth-child(odd){border-right:none}.corp-row.full{grid-column:auto}}
 
+.purpose-wrap{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.purpose-card{
+  background:linear-gradient(180deg,#1B1814,#15130F);
+  border:1px solid rgba(214,168,95,.24);
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 14px 34px rgba(0,0,0,.16);
+}
+.purpose-card h4{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:.07em;
+  color:#DDB570;
+  margin:0 0 12px;
+  text-transform:uppercase;
+}
+.purpose-card p{margin:0;color:#D5C8B4;font-size:14px;line-height:1.65;}
+.purpose-card ul{margin:0;padding-left:18px;color:#D5C8B4;font-size:14px;line-height:1.6;}
+.purpose-card li{margin-bottom:8px;}
+.purpose-card li:last-child{margin-bottom:0;}
+.purpose-card.primary{grid-column:1/-1;border-color:rgba(214,168,95,.38);}
+@media(max-width:820px){.purpose-wrap{grid-template-columns:1fr}.purpose-card.primary{grid-column:auto}}
+
+
+
+
+/* ============================================================
+   MONDRAOX EMERALD + GOLD EXECUTIVE THEME
+   Inspired by the supplied dark teal / metallic gold reference.
+   Existing website content and JavaScript functionality preserved.
+============================================================ */
+:root,
+:root[data-theme="light"],
+:root[data-theme="dark"]{
+  --ink:#F7F2E6;
+  --ink-soft:#C9C5B8;
+  --paper:#061416;
+  --paper-raised:#0B2425;
+  --line:#2E4C47;
+  --brass:#D9B75F;
+  --brass-deep:#F0D989;
+  --teal:#1B5958;
+  --rose:#C98272;
+  --ink-on-brass:#0A1111;
+  --radius-s:6px;
+  --radius-m:12px;
+  --shadow-card:0 18px 50px rgba(0,0,0,.34);
+}
+
+html{background:#050D0E;}
+body{
+  background:
+    radial-gradient(circle at 75% 5%, rgba(30,95,92,.24), transparent 26%),
+    linear-gradient(180deg,#071315 0%,#0A1A1C 48%,#061012 100%);
+  color:var(--ink);
+}
+
+::selection{background:#D9B75F;color:#071112;}
+
+header.site{
+  background:rgba(4,12,13,.94);
+  border-bottom:1px solid rgba(217,183,95,.30);
+  box-shadow:0 10px 30px rgba(0,0,0,.24);
+}
+.navbar{padding:16px 0;}
+.wordmark{
+  color:#F5EACB;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:18px;
+}
+.wordmark span{color:#D9B75F;}
+.navlinks a{color:#B8C7C1;}
+.navlinks a:hover{color:#F0D989;}
+
+.btn{
+  border-radius:4px;
+  border-color:rgba(217,183,95,.48);
+  letter-spacing:.01em;
+}
+.btn.brass{
+  background:linear-gradient(135deg,#F0D989 0%,#D9B75F 55%,#A9782F 100%);
+  color:#071112;
+  border-color:#E6CB78;
+  box-shadow:0 10px 26px rgba(0,0,0,.20);
+}
+.btn.brass:hover{opacity:1;transform:translateY(-1px);filter:brightness(1.05);}
+.btn.secondary{
+  background:rgba(10,45,45,.36);
+  color:#F3E7CA;
+  border-color:rgba(217,183,95,.32);
+}
+.btn.secondary:hover{background:rgba(20,72,70,.48);border-color:#D9B75F;opacity:1;}
+
+/* HERO: angular architecture / gold chevrons */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding-top:94px;
+  padding-bottom:118px;
+  background:
+    linear-gradient(135deg,rgba(3,9,10,.96) 0%,rgba(6,24,25,.94) 48%,rgba(4,13,14,.98) 100%);
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-12% -8% auto auto;
+  width:72%;
+  height:125%;
+  background:
+    linear-gradient(135deg,
+      transparent 0 19%,
+      rgba(217,183,95,.16) 19% 22%,
+      transparent 22% 32%,
+      rgba(217,183,95,.72) 32% 36%,
+      transparent 36% 47%,
+      rgba(16,80,78,.78) 47% 61%,
+      transparent 61% 100%);
+  transform:skewX(-7deg);
+  pointer-events:none;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  left:-16%;
+  bottom:-210px;
+  width:82%;
+  height:430px;
+  border:34px solid rgba(217,183,95,.68);
+  border-left-color:transparent;
+  border-bottom-color:transparent;
+  transform:rotate(45deg);
+  pointer-events:none;
+  opacity:.62;
+}
+.hero .wrap{position:relative;z-index:2;}
+.hero h1{
+  font-size:clamp(42px,6vw,72px);
+  max-width:13ch;
+  color:#FFF8E8;
+  letter-spacing:-.035em;
+}
+.hero .lede{color:#C8D0C8;max-width:60ch;}
+.hero .eyebrow{color:#E4C86F;letter-spacing:.09em;}
+.hero-meta div{color:#9FB4AE;}
+.hero-meta b{color:#F0D989;font-size:24px;}
+
+.ticker{
+  background:
+    linear-gradient(145deg,rgba(14,58,56,.82),rgba(5,24,25,.95));
+  border:1px solid rgba(217,183,95,.42);
+  border-radius:8px;
+  box-shadow:0 24px 70px rgba(0,0,0,.36);
+  position:relative;
+  overflow:hidden;
+}
+.ticker::before{
+  content:"";
+  position:absolute;
+  right:-60px;
+  top:-60px;
+  width:150px;
+  height:150px;
+  border:12px solid rgba(217,183,95,.13);
+  transform:rotate(45deg);
+}
+.ticker-row{border-color:rgba(217,183,95,.15);}
+.ticker-row .label{color:#AEC0BA;}
+.ticker-row .val{color:#F4E4B2;}
+.demo-tag{
+  color:#F0D989;
+  border-color:rgba(240,217,137,.48);
+  background:rgba(217,183,95,.07);
+}
+
+/* SECTION RHYTHM */
+section{border-top:1px solid rgba(217,183,95,.14);}
+section:nth-of-type(even){
+  background:
+    linear-gradient(180deg,rgba(13,42,42,.24),rgba(4,18,19,.12));
+}
+.eyebrow{color:#D9B75F;letter-spacing:.06em;}
+.lede{color:#B8C5BF;}
+.sec-head h2{color:#FFF8E9;}
+
+/* SERVICES */
+.svc-list{border-color:rgba(217,183,95,.22);}
+.svc-item{border-color:rgba(217,183,95,.16);}
+.svc-trigger{color:#F6F0E1;}
+.svc-trigger:hover h3{color:#F0D989;}
+.svc-trigger .n{color:#D9B75F;}
+.svc-trigger .s{color:#9EB0AA;}
+.svc-trigger .plus{color:#B9C8C2;}
+.svc-col h4{color:#D9B75F;}
+.svc-col ul{color:#B8C5BF;}
+.svc-col .example{
+  background:#0B2021;
+  border-color:rgba(217,183,95,.23);
+  color:#C5D0CB;
+}
+.svc-ask{color:#E6CC78;}
+
+/* WHY / FEATURE TILES */
+.why-grid{
+  background:rgba(217,183,95,.18);
+  border-color:rgba(217,183,95,.22);
+}
+.why-cell{
+  background:
+    linear-gradient(145deg,#0D2A2A,#071A1B);
+  transition:transform .2s ease,border-color .2s ease;
+}
+.why-cell:hover{transform:translateY(-3px);}
+.why-cell .num{color:#D9B75F;}
+.why-cell h4{color:#FFF6E3;}
+.why-cell p{color:#AEC0BA;}
+
+/* DASHBOARDS */
+.tabs{border-color:rgba(217,183,95,.22);}
+.tab{color:#9FB3AC;}
+.tab:hover{color:#F0D989;background:rgba(217,183,95,.04);}
+.tab.active{color:#F0D989;border-bottom-color:#D9B75F;background:rgba(20,75,73,.22);}
+.kpi-row{
+  background:rgba(217,183,95,.16);
+  border-color:rgba(217,183,95,.17);
+  border-radius:8px;
+  overflow:hidden;
+}
+.kpi{background:linear-gradient(145deg,#0D2B2B,#081D1E);}
+.kpi .label{color:#9FB2AC;}
+.kpi .value{color:#F2DE9E;}
+.chart-card,
+.data-scroll,
+.roi-results,
+.plan,
+.purpose-card{
+  background:linear-gradient(145deg,#0D2A2A,#07191A);
+  border-color:rgba(217,183,95,.25);
+  box-shadow:var(--shadow-card);
+}
+.chart-card h4{color:#F5E8C7;}
+.insight-box{
+  background:#092021;
+  border-left:3px solid #D9B75F;
+  color:#B8C7C1;
+}
+.insight-box b{color:#F0D989;}
+
+/* TABLES / FORM CONTROLS */
+.filters select,
+.field input,
+.field2 input,
+.field2 select,
+.field2 textarea{
+  background:#061A1B;
+  color:#F5F0E3;
+  border-color:rgba(217,183,95,.27);
+}
+.filters select:focus,
+.field input:focus,
+.field2 input:focus,
+.field2 select:focus,
+.field2 textarea:focus{
+  outline:none;
+  border-color:#D9B75F;
+  box-shadow:0 0 0 3px rgba(217,183,95,.10);
+}
+table.data th{color:#9FB1AA;border-color:rgba(217,183,95,.17);}
+table.data td{border-color:rgba(217,183,95,.10);}
+
+/* PROCESS */
+.process-step{border-color:rgba(217,183,95,.16);}
+.process-step .n{color:#D9B75F;}
+.process-step h4{color:#FFF5E1;}
+.process-step p{color:#B6C4BE;}
+
+/* INDUSTRY CHIPS */
+.chip{
+  border-color:rgba(217,183,95,.26);
+  color:#C0CBC5;
+  background:rgba(16,67,65,.16);
+}
+.chip:hover{border-color:#D9B75F;color:#F0D989;}
+
+/* PRICING */
+.currency-toggle{border-color:rgba(217,183,95,.28);}
+.currency-toggle button{color:#9FB0A9;}
+.currency-toggle button.active{
+  background:linear-gradient(135deg,#F0D989,#D9B75F);
+  color:#071112;
+}
+.plan{
+  border-radius:10px;
+  position:relative;
+  overflow:hidden;
+  transition:transform .2s ease,border-color .2s ease;
+}
+.plan::before{
+  content:"";
+  position:absolute;
+  right:-34px;
+  top:-34px;
+  width:86px;
+  height:86px;
+  border:7px solid rgba(217,183,95,.11);
+  transform:rotate(45deg);
+}
+.plan:hover{transform:translateY(-5px);border-color:rgba(217,183,95,.50);}
+.plan.feat{
+  border-color:#D9B75F;
+  box-shadow:0 26px 70px rgba(0,0,0,.34),0 0 0 1px rgba(217,183,95,.24);
+}
+.plan .tag{color:#D9B75F;}
+.plan h3{color:#FFF6E4;}
+.plan .for,.plan .setup,.plan ul li{color:#B7C3BD;}
+.plan ul li{border-color:rgba(217,183,95,.12);}
+.plan .price{color:#F0D989;}
+
+/* ROI */
+.roi-big{color:#F0D989;}
+.roi-line{border-color:rgba(217,183,95,.12);}
+.roi-note,.roi-sub{color:#A8B8B1;}
+
+/* CORPORATE / ABOUT */
+.about-grid h4,
+.purpose-card h4{color:#D9B75F;}
+.about-grid p,
+.purpose-card p,
+.purpose-card ul{color:#B9C6C0;}
+.purpose-card.primary{
+  border-color:rgba(217,183,95,.40);
+}
+
+/* CONTACT */
+#contact{
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(145deg,rgba(4,14,15,.98),rgba(8,33,33,.95));
+}
+#contact::before{
+  content:"";
+  position:absolute;
+  right:-170px;
+  bottom:-210px;
+  width:430px;
+  height:430px;
+  border:26px solid rgba(217,183,95,.13);
+  transform:rotate(45deg);
+}
+#contact .wrap{position:relative;z-index:2;}
+.contact-info .l{color:#9DAFA8;}
+.contact-info .v{color:#EFE3C7;}
+.form-msg{
+  border-left-color:#D9B75F;
+  background:#0A2122;
+  color:#C5D0CB;
+}
+
+/* FOOTER */
+footer{
+  background:#030B0C;
+  border-top-color:rgba(217,183,95,.26);
+}
+.foot-row p{color:#8EA19A;}
+
+@media(max-width:900px){
+  .hero{padding-top:70px;padding-bottom:96px;}
+  .hero::before{width:100%;opacity:.72;}
+  .hero::after{left:-38%;bottom:-240px;}
+}
+@media(max-width:640px){
+  .hero h1{font-size:40px;}
+  .hero::before{opacity:.42;}
+  .hero::after{opacity:.35;}
+  .ticker{border-radius:6px;}
+}
+
 </style>
 </head>
 <body>
@@ -814,7 +1192,7 @@ footer{
         <span class="chip">Right-sized advice</span>
       </div>
       <h4 style="margin-top:26px;">A NOTE ON COMPLIANCE</h4>
-      <p>Where a task legally requires a licensed accountant, tax practitioner, or other regulated professional in the Philippines, that work is performed or reviewed by an appropriately credentialed partner — MONDRAOX does not represent itself as a substitute for licensed professional services.</p>
+      <p>Services are provided subject to applicable laws, regulations, and professional licensing requirements. Where work legally requires a licensed accountant, tax practitioner, or another regulated professional in the Philippines, the regulated work must be performed, reviewed, or supervised by an appropriately qualified professional.</p>
     </div>
   </div>
 
@@ -835,7 +1213,37 @@ footer{
       <div class="corp-row"><p class="l">SEC Processing Office</p><p class="v">SEC Main Office · Makati</p></div>
       <div class="corp-row"><p class="l">Authorized Representative</p><p class="v">Angelica Banug Viloria</p></div>
     </div>
-    <p class="corp-note">Registration summary shown for company identification. Formal registration documents and credentials should be verified from the official company records when required.</p>
+
+    <div class="purpose-wrap">
+      <div class="purpose-card primary">
+        <h4>Primary Purpose</h4>
+        <p>To provide business consulting and advisory services to individuals, enterprises, corporations, organizations, and other entities, including business management consulting, financial and management advisory, accounting and bookkeeping support, payroll and compensation administration, data management and analytics, business process improvement, operational support, and other related professional and administrative services, subject to applicable laws, regulations, and professional licensing requirements.</p>
+      </div>
+
+      <div class="purpose-card">
+        <h4>Secondary / Related Activities</h4>
+        <ul>
+          <li>Accounting and bookkeeping support and preparation of management reports and financial information;</li>
+          <li>Payroll processing, payroll administration, employee compensation records, and related administrative services;</li>
+          <li>Business data management, reporting, analytics, documentation, and information-processing services;</li>
+          <li>Management consulting, business process review, operational planning, and organizational support;</li>
+          <li>Financial management and budgeting support, cash-flow monitoring, cost analysis, and management reporting;</li>
+        </ul>
+      </div>
+
+      <div class="purpose-card">
+        <h4>Additional Related Activities</h4>
+        <ul>
+          <li>Business registration, compliance coordination, documentation, and administrative support;</li>
+          <li>Accounting and business systems implementation, process design, and workflow improvement;</li>
+          <li>Outsourced finance, accounting, payroll, and administrative functions;</li>
+          <li>Training, seminars, and workshops relating to accounting systems, business administration, data management, payroll, and business processes; and</li>
+          <li>Such other lawful activities as may be incidental, necessary, or related to the foregoing purposes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="corp-note">The purpose and related activities above are reflected from the business information provided by the company. Services remain subject to applicable laws, regulations, professional licensing requirements, and the final scope of each engagement.</p>
   </div>
 </section>
 
@@ -923,15 +1331,15 @@ var SERVICES = [
   {
     title:"Business Consulting",
     sub:"Strategy · Operations · Process Improvement",
-    includes:["Strategy & growth planning","Operations diagnostics","Process improvement & SOP design"],
-    deliverables:["Current-state assessment","Prioritized recommendations","Implementation roadmap"],
+    includes:["Strategy & growth planning","Management consulting & operational planning","Business process review, SOP & workflow improvement","Business registration, compliance coordination & documentation support","Business systems implementation support"],
+    deliverables:["Current-state assessment","Prioritized recommendations","Implementation roadmap","Process / workflow documentation"],
     example:"A 6-week engagement for a 12-person logistics SME identified 3 manual approval steps that were adding 4 days to order turnaround.",
     cta:"Ask about a business assessment"
   },
   {
     title:"Accounting & Finance",
     sub:"Bookkeeping · Management Reports · Budgeting · Analysis",
-    includes:["Monthly bookkeeping & reconciliation","Management reporting pack","Budget vs. actual tracking","Financial analysis"],
+    includes:["Accounting & bookkeeping support","Management reporting & financial information","Budgeting & cash-flow monitoring","Cost and financial analysis"],
     deliverables:["Monthly financial statements","Variance commentary","Cash flow summary"],
     example:"A recurring monthly reporting pack: P&L, balance sheet, budget-vs-actual, and a one-page commentary a non-finance founder can actually read.",
     cta:"Ask about monthly bookkeeping"
@@ -939,7 +1347,7 @@ var SERVICES = [
   {
     title:"Payroll & Administration",
     sub:"Payroll Processing · Compensation Records · Admin Support",
-    includes:["End-to-end payroll processing","Compensation record-keeping","General administrative support"],
+    includes:["Payroll processing & administration","Compensation record-keeping","Related administrative support"],
     deliverables:["Payroll register","Payslips","Statutory contribution summaries"],
     example:"Payroll for a 25-person team processed on a fixed monthly schedule, with a compensation dashboard the founder can check anytime.",
     cta:"Ask about payroll support"
@@ -947,7 +1355,7 @@ var SERVICES = [
   {
     title:"Data & Analytics",
     sub:"Data Management · Reporting · Business Intelligence",
-    includes:["Data cleanup & structuring","Recurring reporting","Dashboards & business intelligence"],
+    includes:["Business data management & structuring","Reporting, analytics & information processing","Dashboards & business intelligence","Documentation support"],
     deliverables:["Cleaned data model","Live dashboard","Monthly refresh & insight notes"],
     example:"A single sales + operations dashboard replacing 4 separate spreadsheets a client's team was manually reconciling every week.",
     cta:"Ask about a dashboard build"
@@ -955,7 +1363,7 @@ var SERVICES = [
   {
     title:"Outsourcing",
     sub:"Finance & Accounting · Payroll · Back-office Operations",
-    includes:["Outsourced finance & accounting function","Outsourced payroll function","Outsourced back-office operations"],
+    includes:["Outsourced finance & accounting support","Outsourced payroll administration","Outsourced administrative & back-office operations"],
     deliverables:["Dedicated service owner","SLA-based delivery","Monthly performance summary"],
     example:"A foreign SME entering the Philippines runs its entire local back office through MONDRAOX rather than hiring an internal team from day one.",
     cta:"Ask about outsourcing a function"
