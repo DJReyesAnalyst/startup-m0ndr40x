@@ -794,11 +794,9 @@ footer{
         </div>
 
         <div class="field full">
-          <button type="submit" class="btn primary">Send inquiry</button>
+          <button type="submit" class="btn primary">Send Query</button>
         </div>
 
-        <p class="form-note">Demo contact form only. Connect this form to your preferred email or form service before launch.</p>
-        <div class="form-msg" id="formMsg">Thank you. This demo form does not send yet, but the request has been captured on screen.</div>
       </form>
     </div>
   </section>
@@ -865,7 +863,25 @@ document.querySelectorAll('[data-service]').forEach(link => {
 
 document.getElementById('contactForm').addEventListener('submit', function(e){
   e.preventDefault();
-  document.getElementById('formMsg').classList.add('show');
+
+  const name = document.getElementById('name').value.trim();
+  const company = document.getElementById('company').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const service = document.getElementById('service').value;
+  const message = document.getElementById('message').value.trim();
+
+  const subject = `Website Inquiry - ${service}`;
+  const body = [
+    `Name: ${name}`,
+    `Company: ${company || 'Not provided'}`,
+    `Email: ${email}`,
+    `Service: ${service}`,
+    '',
+    'How can we help?',
+    message || 'No additional message provided.'
+  ].join('\n');
+
+  window.location.href = `mailto:info@mondraox.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
 </script>
 </body>
